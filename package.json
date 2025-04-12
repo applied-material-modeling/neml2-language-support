@@ -1,243 +1,58 @@
 {
-	"name": "moose-language-support",
-	"author": "Daniel Schwen <node@schwen.de> (https://www.schwen.de)",
-	"contributors": [
-		"Max Nezdyur"
-	],
-	"publisher": "DanielSchwen",
-	"license": "LGPL",
-	"displayName": "MOOSE Language Support",
-	"icon": "images/icon.png",
-	"description": "Assists in writing MOOSE input files and code",
-	"version": "1.4.2",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/idaholab/moose-language-support"
-	},
-	"engines": {
-		"vscode": "^1.75.0"
-	},
-	"categories": [
-		"Language Packs",
-		"Snippets",
-		"Formatters"
-	],
-	"main": "./out/main",
-	"capabilities": {
-		"virtualWorkspaces": {
-			"supported": false,
-			"description": "Obtaining syntax definitions from MOOSE apps is not yet supported."
-		}
-	},
-	"contributes": {
-		"commands": [
-			{
-				"command": "mooseLanguageSupport.startServer",
-				"title": "(Re)Start MOOSE Language Server"
-			}
-		],
-		"languages": [
-			{
-				"id": "moose",
-				"extensions": [
-					".i"
-				],
-				"configuration": "./language-configuration.json"
-			},
-			{
-				"id": "moose-test-spec",
-				"extensions": [
-					"tests"
-				],
-				"configuration": "./language-configuration.json"
-			}
-		],
-		"grammars": [
-			{
-				"language": "moose",
-				"scopeName": "input.moose",
-				"path": "./grammars/moose.json"
-			},
-			{
-				"language": "moose-test-spec",
-				"scopeName": "tests.moose",
-				"path": "./grammars/moose-test-spec.json"
-			}
-		],
-		"snippets": [
-			{
-				"language": "cpp",
-				"path": "./snippets/action.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/adkernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/fvkernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/auxkernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/bc.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/fvbc.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/constraint.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/control.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/damper.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/dgkernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/dirackernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/function.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/ic.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/indicator.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/interfacekernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/kernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/marker.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/material.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/functormaterial.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/mesh.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/meshmodifier.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/multiapp.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/nodalkernel.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/pps.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/predictor.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/timeintegrator.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/timestepper.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/transfer.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/userobjects.json"
-			},
-			{
-				"language": "cpp",
-				"path": "./snippets/vectorpps.json"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "MOOSE language support configuration",
-			"properties": {
-				"languageServerMoose.allowTestObjects": {
-					"type": "boolean",
-					"default": false,
-					"description": "Show test objects in the suggestion list."
-				},
-				"languageServerMoose.maxNumberOfProblems": {
-					"scope": "resource",
-					"type": "number",
-					"default": 100,
-					"description": "Controls the maximum number of problems produced by the server."
-				},
-				"languageServerMoose.trace.server": {
-					"scope": "window",
-					"type": "string",
-					"enum": [
-						"off",
-						"messages",
-						"verbose"
-					],
-					"default": "off",
-					"description": "Traces the communication between VS Code and the language server."
-				}
-			}
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run esbuild-base -- --minify",
-		"esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
-		"esbuild": "npm run esbuild-base -- --sourcemap",
-		"esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
-		"test-compile": "tsc -p ./"
-	},
-	"devDependencies": {
-		"@types/mocha": "^9.1.0",
-		"@types/node": "^16.11.7",
-		"@types/vscode": "^1.63.0",
-		"@typescript-eslint/eslint-plugin": "^5.19.0",
-		"@typescript-eslint/parser": "^5.19.0",
-		"esbuild": "^0.25.0",
-		"eslint": "^8.13.0",
-		"mocha": "^11.0.1",
-		"rimraf": "^3.0.2",
-		"typescript": "^5.3.3"
-	},
-	"dependencies": {
-		"@vscode/test-electron": "^2.3.4",
-		"date-fns": "^3.3.1",
-		"vscode-jsonrpc": "^8.2.0",
-		"vscode-languageclient": "^9.0.1"
-	}
+  "name": "neml2-language-support",
+  "author": "Gary (Tianchen) Hu",
+  "publisher": "GaryTianchenHu",
+  "displayName": "NEML2 Language Features",
+  "description": "Language features for NEML2 input files",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/applied-material-modeling/neml2-language-support.git"
+  },
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:neml2"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "neml2-language-support.start-server",
+        "title": "(Re)start NEML2 Language Server"
+      }
+    ]
+  },
+  "configuration": {
+    "type": "object",
+    "title": "NEML2 language support configuration"
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.75.1",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "esbuild": "^0.25.1",
+    "eslint": "^9.23.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.2",
+    "vscode-languageclient": "^9.0.1"
+  }
 }

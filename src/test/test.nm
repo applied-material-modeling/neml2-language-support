@@ -1,0 +1,8 @@
+[Models]
+    [a]
+        type = ScalarVariableRate
+        variable = 'state/alpha'
+        time = 'forces/t'
+        rate = 'state/alpha_rate'
+    []
+[]
