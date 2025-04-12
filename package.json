@@ -4,7 +4,7 @@
   "publisher": "GaryTianchenHu",
   "displayName": "NEML2 Language Features",
   "description": "Language features for NEML2 input files",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/applied-material-modeling/neml2-language-support.git"

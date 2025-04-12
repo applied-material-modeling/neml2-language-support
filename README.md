@@ -1,4 +1,4 @@
-# NEML2 Language Support
+# NEML2 Language Features
 
 Language features for NEML2 input files with extension ".nm".
 
@@ -16,6 +16,10 @@ This is a fork of [idaholab/moose-language-support](https://github.com/idaholab/
 Autocompletion is under development.
 
 ## Release Notes
+
+### 0.0.2
+
+Fork from idaholab/moose-language-support. Update README.md to explain modifications.
 
 ### 0.0.1
 
